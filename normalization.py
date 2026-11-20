@@ -8,8 +8,8 @@ def fit_normalization(calibration, settings):
     blocks = settings['feature_blocks']
     columns = [c for block in blocks.values() for c in block]
     center = calibration[columns].median().fillna(0)
-    # Основний масштаб — міжквартильний розмах. Коли він майже нульовий, беремо
-    # стандартне відхилення, а для сталої ознаки — одиницю.
+    # Основний масштаб - міжквартильний розмах. Коли він майже нульовий, беремо
+    # стандартне відхилення, а для сталої ознаки - одиницю.
     scale = calibration[columns].quantile(.75) - calibration[columns].quantile(.25)
     tolerance = 1e-9 * center.abs().clip(lower=1)
     scale = scale.where(scale > tolerance)

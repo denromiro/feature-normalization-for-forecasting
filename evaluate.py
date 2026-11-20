@@ -115,7 +115,7 @@ def evaluate(path):
     summary = table[table['period'] == 'both']
     summary.to_csv(output / 'summary.csv', index=False)
     names = {'112d': '112 днів', 'all': 'Повна історія', 'both': 'Обидва промо',
-             '2026-05-28': '28.05–10.06, 14 днів', '2026-06-11': '11–21.06, 11 днів'}
+             '2026-05-28': '28.05-10.06, 14 днів', '2026-06-11': '11-21.06, 11 днів'}
     def html_table(frame):
         labels = {'window': 'Історія', 'period': 'Період', 'standard': 'Стандартне, MAPE %',
                   'project': 'Проєктне, MAPE %', 'difference_pp': 'Різниця, в. п.'}
