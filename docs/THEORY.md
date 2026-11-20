@@ -16,7 +16,7 @@
 
 $$
 B_h(T(x_0),r_0)\subset T(B(x_0,\varepsilon)),\qquad
-x_0\in K,\quad 0<\varepsilon<\operatorname{dist}(K,\partial D).
+x_0\in K,\quad 0<\varepsilon<\mathrm{dist}(K,\partial D).
 $$
 
 Радіус $r_0>0$ можна вибрати спільним для всіх $x_0\in K$ і всіх допустимих $T$ за фіксованих $K$ та $\varepsilon$. Алгоритм користується умовами цього твердження ще до навчання моделі. Обчислення самого $r_0$ для вибору профілю не потрібне. [Формулювання в розділі 4 статті](https://arxiv.org/html/2509.02008v3#S4).
