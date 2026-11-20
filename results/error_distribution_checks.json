@@ -1,0 +1,14 @@
+{
+  "positive_per_window": {
+    "112d": 5282,
+    "all": 5282
+  },
+  "zero_per_window": {
+    "112d": 13021,
+    "all": 13021
+  },
+  "paired_predictions_complete": true,
+  "bin_counts_sum_to_positive_n": true,
+  "source_manifests_verified": true,
+  "equality_tolerance": 1e-08
+}

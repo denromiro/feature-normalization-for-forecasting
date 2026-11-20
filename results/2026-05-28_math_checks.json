@@ -1,0 +1,13 @@
+{
+  "alpha": 0.115,
+  "budget_lower": 1.8500847974601282,
+  "budget_upper": 1.9203813714696383,
+  "budget_quad": 1.884350915521997,
+  "quad_error_estimate": 2.092049772893649e-14,
+  "fine_lower": 1.8799727248137899,
+  "fine_upper": 1.888756671507227,
+  "max_inverse_error": 1.1102230246251565e-16,
+  "max_log_distortion_error": 2.4526796149615393e-09,
+  "positive_slopes": true,
+  "anchors_fixed": true
+}

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: Feature normalization for promotional sales forecasting
+type: software
+authors:
+- family-names: Sevost'yanov
+  given-names: Evgeny
+  affiliation: Department of Mathematical Analysis, Business Analysis and Statistics,
+    Zhytomyr Ivan Franko State University
+- family-names: Romash
+  given-names: Denys
+  affiliation: Department of Mathematical Analysis, Business Analysis and Statistics,
+    Zhytomyr Ivan Franko State University
+abstract: Software demonstrating the use of a mathematical result from NRFU project
+  2025.02/0010 to normalize features for promotional sales forecasting.

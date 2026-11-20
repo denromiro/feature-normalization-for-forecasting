@@ -1,0 +1,26 @@
+{
+  "network_shops": 148,
+  "history_rows": 208429,
+  "target_rows": 22089,
+  "excluded_history_rows": 2674,
+  "excluded_target_rows": 17,
+  "pseudonyms_preserved": true,
+  "raw_mapping_included": false,
+  "scope": "confirmed network, fixed before model fitting; fact-based availability used only in evaluation",
+  "rows_before_origin": [
+    {
+      "origin": "2026-05-28",
+      "full": 190942,
+      "short_112d": 27254,
+      "calibration_56d": 11561,
+      "target": 17487
+    },
+    {
+      "origin": "2026-06-11",
+      "full": 208429,
+      "short_112d": 41199,
+      "calibration_56d": 26402,
+      "target": 4602
+    }
+  ]
+}

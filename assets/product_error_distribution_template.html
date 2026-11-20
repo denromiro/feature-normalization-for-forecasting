@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Помилки товарних тоталів · стандартне / проєктне нормування</title>
+<style>
+:root{color-scheme:light;--blue:#2876bb;--orange:#db7527;--ink:#18283c;--muted:#58677b}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:var(--ink);font:15px/1.55 system-ui,Segoe UI,sans-serif}
+main{max-width:1560px;margin:auto;padding:30px}h1{font-size:30px;font-weight:650;margin:5px 0 10px}h2{font-size:20px;margin:0 0 12px}
+p{margin:8px 0 16px}.eyebrow{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}.controls{display:flex;gap:18px;flex-wrap:wrap;margin:24px 0 18px}.controls label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+select{min-width:210px;padding:10px 32px 10px 12px;font:inherit;background:white;border:1px solid #cbd4de;border-radius:7px;color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.card,.panel{background:white;border:1px solid #dce3eb;border-radius:10px;padding:20px}.number{font-size:30px;font-weight:650}
+.plots{display:grid;grid-template-columns:1fr 1fr;gap:18px}.plot{height:510px;min-width:0}.plot-title{font-size:18px;font-weight:650;margin:0 0 3px}.panel{min-width:0}.blue{color:var(--blue)}.orange{color:var(--orange)}
+.tables{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;margin-top:20px}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:right;padding:11px 10px;border-bottom:1px solid #e4eaf0;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{font-weight:600;background:#f7f9fb}tfoot td{font-weight:650}a{color:#205d9b}.note{font-size:13px}.status{min-height:25px}
+@media(max-width:950px){.plots,.tables{grid-template-columns:1fr}main{padding:18px}.cards{gap:8px}.card{padding:13px}.number{font-size:25px}}@media print{.controls{display:none}.plot{height:400px}body{background:white}main{padding:0}}
+</style>
+<script src="../assets/plotly.min.js"></script>
+</head>
+<body><main>
+
+<h1>Похибка прогнозу сумарних продажів товару</h1>
+<p class="muted">Кожна бульбашка відповідає одному прогнозу продажів товару за акцію по всіх відібраних магазинах. По горизонталі відкладено абсолютну відносну похибку (APE), по вертикалі — прогноз у штуках. Більша бульбашка означає більші фактичні продажі.</p>
+<div class="controls">
+<label>Історія навчання<select id="history"><option value="all">Повна доступна</option><option value="112d">Останні 112 днів</option></select></label>
+<label>Контрольне промо<select id="period"><option value="both">Обидва промо разом</option><option value="2026-05-28">28.05–10.06 · 14 днів</option><option value="2026-06-11">11–21.06 · 11 днів</option></select></label>
+<label>Шкали обох осей<select id="scale"><option value="compressed">Логарифмічні, log(1+x)</option><option value="linear">Лінійні</option></select></label>
+</div>
+<p id="scope" class="status"></p>
+<div class="cards">
+<div class="card"><div class="muted">Менша похибка з проєктним нормуванням</div><div id="better" class="number"></div><div id="better_pct" class="muted"></div></div>
+<div class="card"><div class="muted">Більша похибка з проєктним нормуванням</div><div id="worse" class="number"></div><div id="worse_pct" class="muted"></div></div>
+<div class="card"><div class="muted">Однакова похибка</div><div id="equal" class="number"></div><div id="equal_pct" class="muted"></div></div>
+</div>
+<div class="plots">
+<section class="panel"><p class="plot-title blue">Стандартне масштабування</p><p id="standard_score" class="muted"></p><div id="standard_plot" class="plot"></div></section>
+<section class="panel"><p class="plot-title orange">Проєктне нормування</p><p id="project_score" class="muted"></p><div id="project_plot" class="plot"></div></section>
+</div>
+<p id="axis_note" class="note muted"></p>
+<p class="note muted">Пунктир позначає похибки 15%, 25%, 50% і 100%. Наведіть курсор на точку, щоб побачити прогноз і фактичні продажі. Подвійне клацання повертає початковий масштаб.</p>
+<div class="tables">
+<section class="panel"><h2>Коротка історія · 112 днів</h2><p class="note muted">Для вибраної акції Δ показує зміну кількості прогнозів після проєктного нормування.</p><table><thead><tr><th>APE</th><th class="blue">Стандартне</th><th class="orange">Проєктне</th><th>Δ</th></tr></thead><tbody id="bins_112d"></tbody><tfoot id="total_112d"></tfoot></table><p id="summary_112d" class="note"></p></section>
+<section class="panel"><h2>Повна історія</h2><p class="note muted">Для вибраної акції Δ показує зміну кількості прогнозів після проєктного нормування.</p><table><thead><tr><th>APE</th><th class="blue">Стандартне</th><th class="orange">Проєктне</th><th>Δ</th></tr></thead><tbody id="bins_all"></tbody><tfoot id="total_all"></tfoot></table><p id="summary_all" class="note"></p></section>
+</div><div style="margin-top:20px"><section class="panel"><h2>Прогнози за нульових продажів</h2><p class="note muted">За нульових продажів APE не визначено. У цій таблиці менший прогноз означає меншу абсолютну похибку у штуках.</p><table><tbody id="zeros"></tbody></table><p class="note muted">Додатний залишок хоча б одного дня не свідчить про наявність товару протягом усієї акції.</p></section>
+</div>
+<section class="panel" style="margin-top:20px"><h2>Як обчислено похибку</h2>
+<p class="note">Після завершення акції відбираємо спостереження, для яких зареєстровано продаж або додатний залишок. Складаємо прогноз і продажі для кожного товару в межах однієї акції. Для додатних продажів APE = |прогноз − продажі| / продажі × 100%. Похибки вважаємо рівними за різниці до 10⁻⁸ відсоткового пункту включно. За нульових продажів застосовуємо той самий числовий допуск у штуках.</p>
+<p class="note">Кожний товар в одній акції має однакову вагу. Середнє значення APE точок на діаграмі дає MAPE для вибраної моделі та періоду.</p>
+<p class="note"><a href="../results/report.html">Основний звіт</a> · <a href="../results/product_error_bins.csv">Інтервали CSV</a> · <a href="../results/product_error_comparison.csv">Кращі / гірші CSV</a> · <a href="../results/product_error_zero_actual.csv">Нульові продажі CSV</a> · <a href="../results/product_error_details.csv">Товарні тотали CSV</a></p>
+</section>
+</main>
+<script>
+const data = __DATA__;
+const rows = data.rows.map(row => Object.fromEntries(data.columns.map((key,i) => [key,row[i]])));
+const fmt = new Intl.NumberFormat('uk-UA', {maximumFractionDigits:0});
+const decimal = new Intl.NumberFormat('uk-UA', {maximumFractionDigits:2});
+const percent = value => decimal.format(value)+'%';
+const labels = ['0–15%', '>15–25%', '>25–50%', '>50–100%', '>100%'];
+const colors = {standard:'#2876bb', project:'#db7527'};
+const ticksX = [0,15,25,50,100,300,1000,3000,10000,20000];
+const ticksY = [0,1,10,50,200,500,1000,2500];
+let generation = 0;
+
+async function render() {
+  const version = ++generation;
+  document.body.dataset.ready = 'false';
+  const windowName = document.getElementById('history').value;
+  const period = document.getElementById('period').value;
+  const compressed = document.getElementById('scale').value === 'compressed';
+  const match = row => row.window === windowName && row.period === period;
+  const selected = rows.filter(row => row.window === windowName && (period==='both' || row.origin===period));
+  const summary = data.comparisons.find(match);
+  const zero = data.zeros.find(match);
+  document.getElementById('scope').textContent = 'Прогнозів із продажами — '+fmt.format(selected.length)+'. Прогнозів за нульових продажів — '+fmt.format(zero.zero_n)+'.';
+  for (const key of ['better','worse','equal']) {
+    document.getElementById(key).textContent = fmt.format(summary[key]);
+    document.getElementById(key+'_pct').textContent = percent(summary[key]/summary.positive_n*100)+' прогнозів із продажами';
+  }
+  for (const history of ['112d','all']) {
+    const score = method => data.scores.find(row => row.window===history && row.period===period && row.method===method);
+    const standardScore=score('standard'), projectScore=score('project');
+    document.getElementById('bins_'+history).innerHTML = labels.map(label => {
+      const get = method => data.bins.find(row => row.window===history && row.period===period && row.method===method && row.error_bin===label).count;
+      const standard=get('standard'), project=get('project'), delta=project-standard;
+      return `<tr><td>${label}</td><td>${fmt.format(standard)}</td><td>${fmt.format(project)}</td><td>${delta>0?'+':''}${fmt.format(delta)}</td></tr>`;
+    }).join('');
+    document.getElementById('total_'+history).innerHTML = `<tr><td>Усього</td><td>${standardScore.positive_n}</td><td>${projectScore.positive_n}</td><td>0</td></tr>`;
+    const paired=data.comparisons.find(row=>row.window===history && row.period===period);
+    document.getElementById('summary_'+history).textContent = 'MAPE: '+percent(standardScore.mape)+' → '+percent(projectScore.mape)+'. Понад 50%: '+standardScore.over_50+' → '+projectScore.over_50+'. Понад 100%: '+standardScore.over_100+' → '+projectScore.over_100+'. Проєктне: '+paired.better+' кращих, '+paired.worse+' гірших, '+paired.equal+' однакових.';
+  }
+  for(const method of ['standard','project']) {
+    const score=data.scores.find(row=>match(row) && row.method===method);
+    document.getElementById(method+'_score').textContent = 'MAPE '+percent(score.mape)+' · похибка >100%: '+score.over_100;
+  }
+  document.getElementById('zeros').innerHTML = [
+    ['Прогнозів за нульових продажів',fmt.format(zero.zero_n)],
+    ['Менша похибка, кількість прогнозів',fmt.format(zero.better)],
+    ['Більша похибка, кількість прогнозів',fmt.format(zero.worse)],
+    ['Однакова похибка',fmt.format(zero.equal)],
+    ['Стандартний прогноз, усього шт.',decimal.format(zero.standard_forecast)],
+    ['Проєктний прогноз, усього шт.',decimal.format(zero.project_forecast)]
+  ].map(row=>`<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
+  const transform = x => compressed ? Math.log1p(x) : x;
+  const scaleRows = rows.filter(row => period==='both' || row.origin===period);
+  const maxX = Math.max(...scaleRows.map(row=>Math.max(row.ape_standard,row.ape_project)));
+  const maxY = Math.max(...scaleRows.map(row=>Math.max(row.standard,row.project)));
+  const xLimit = transform(Math.max(110,maxX))*(compressed?1.035:1.05);
+  const yLimit = transform(Math.max(1,maxY))*(compressed?1.05:1.08);
+  document.getElementById('axis_note').textContent = compressed
+    ? 'Шкала log(1+x) охоплює всі спостереження. Позначки осей показують вихідні значення. Межі однакові для обох моделей та обох довжин історії.'
+    : 'Обидва графіки мають однакові лінійні шкали й охоплюють усі спостереження.';
+  await Promise.all(['standard','project'].map(method => {
+    const trace = {type:'scattergl',mode:'markers',showlegend:false,
+      x:selected.map(row=>transform(row['ape_'+method])), y:selected.map(row=>transform(row[method])),
+      marker:{color:colors[method],opacity:.38,size:selected.map(row=>Math.sqrt(7+180*Math.sqrt(row.actual_qty/data.bubble_max_actual)))},
+      customdata:selected.map(row=>[row.product_id,row.origin,row.actual_qty,row[method],row['ape_'+method]]),
+      hovertemplate:'%{customdata[0]}<br>Промо: %{customdata[1]}<br>Факт: %{customdata[2]:.2f} шт.<br>Прогноз: %{customdata[3]:.2f} шт.<br>APE: %{customdata[4]:.2f}%<extra></extra>'};
+    const axis = (title,range,ticks) => ({title:{text:title,font:{size:13}},range,zeroline:false,
+      gridcolor:'#e9eef4',...(compressed?{tickmode:'array',tickvals:ticks.map(transform),ticktext:ticks.map(String)}:{})});
+    const layout = {margin:{l:62,r:15,t:20,b:80},paper_bgcolor:'white',plot_bgcolor:'white',font:{family:'Segoe UI, sans-serif',color:'#34445b'},
+      xaxis:{...axis('Абсолютна відносна похибка, %',[0,xLimit],ticksX),tickangle:-45},
+      yaxis:axis('Прогноз, штук',[0,yLimit],ticksY),
+      shapes:[15,25,50,100].map(value=>({type:'line',xref:'x',yref:'paper',x0:transform(value),x1:transform(value),y0:0,y1:1,line:{color:'#7b8796',width:1,dash:'dash'}})),
+      hovermode:'closest',dragmode:'zoom'};
+    return Plotly.react(method+'_plot',[trace],layout,{responsive:true,displaylogo:false,scrollZoom:false,
+      modeBarButtonsToRemove:['select2d','lasso2d'],toImageButtonOptions:{format:'png',filename:'error_'+method,scale:2}});
+  }));
+  if(version===generation) document.body.dataset.ready = 'true';
+}
+for (const id of ['history','period','scale']) document.getElementById(id).addEventListener('change',render);
+render();
+</script></body></html>

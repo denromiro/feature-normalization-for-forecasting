@@ -1,0 +1,11 @@
+{
+  "models": 8,
+  "prediction_rows": 88356,
+  "saved_models_replay_error": 0.0,
+  "reference_available": true,
+  "reference_max_difference": 0.0,
+  "independent_product_sums_match": true,
+  "positive_product_periods": 797,
+  "source_hashes_match": true,
+  "network_shops": 148
+}

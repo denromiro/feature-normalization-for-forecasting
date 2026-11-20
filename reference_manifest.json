@@ -1,0 +1,10 @@
+{
+  "reference/mape.csv": {
+    "sha256": "1dd33c4d86c33ccff0214c242c91f9f3abb43d9f5ce33884b24bd8cb54835c40",
+    "bytes": 633
+  },
+  "reference/predictions.csv.gz": {
+    "sha256": "b1244ee7668f2531803324a227472d47ba5c10d52221021297fce1d73b0aa6a0",
+    "bytes": 1199214
+  }
+}

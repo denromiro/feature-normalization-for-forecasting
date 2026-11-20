@@ -1,0 +1,77 @@
+<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Стандартне та проєктне нормування: MAPE товарних тоталів</title>
+<style>body{font:16px Segoe UI,Arial;max-width:1150px;margin:32px auto;padding:0 20px;color:#203c34}p,li{line-height:1.6}table{border-collapse:collapse;font-size:14px}td,th{padding:10px;border-bottom:1px solid #dce5df;text-align:right;white-space:nowrap}th{background:#edf5ef}.scroll{overflow:auto;margin-bottom:26px}a{color:#146b50}</style>
+<h1>Стандартне та проєктне нормування</h1>
+<p>Для мережі зі 148 магазинів порівнюємо два способи нормування ознак. Градієнтний бустинг прогнозує продажі в кожному магазині. Для оцінки підсумовуємо прогноз і фактичні продажі товару за період промо.</p>
+<h2>Обидва промо</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Історія</th>
+      <th>Період</th>
+      <th>Стандартне, MAPE %</th>
+      <th>Проєктне, MAPE %</th>
+      <th>Різниця, в. п.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>112 днів</td>
+      <td>Обидва промо</td>
+      <td>368,12</td>
+      <td>262,31</td>
+      <td>-105,81</td>
+    </tr>
+    <tr>
+      <td>Повна історія</td>
+      <td>Обидва промо</td>
+      <td>192,77</td>
+      <td>146,53</td>
+      <td>-46,24</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Кожне промо</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Історія</th>
+      <th>Період</th>
+      <th>Стандартне, MAPE %</th>
+      <th>Проєктне, MAPE %</th>
+      <th>Різниця, в. п.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>112 днів</td>
+      <td>28.05–10.06, 14 днів</td>
+      <td>464,49</td>
+      <td>317,75</td>
+      <td>-146,75</td>
+    </tr>
+    <tr>
+      <td>112 днів</td>
+      <td>11–21.06, 11 днів</td>
+      <td>55,91</td>
+      <td>82,72</td>
+      <td>26,81</td>
+    </tr>
+    <tr>
+      <td>Повна історія</td>
+      <td>28.05–10.06, 14 днів</td>
+      <td>227,85</td>
+      <td>169,97</td>
+      <td>-57,88</td>
+    </tr>
+    <tr>
+      <td>Повна історія</td>
+      <td>11–21.06, 11 днів</td>
+      <td>79,11</td>
+      <td>70,59</td>
+      <td>-8,53</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>MAPE дорівнює середній абсолютній відносній похибці для 797 товарів-періодів із додатними продажами (609 у першому промо і 188 у другому). До підсумку входять магазини, де під час акції товар продавався або мав додатний залишок. Навіть за цього відбору товар міг бути відсутнім у частині днів.</p>
+<p>Нормування використовує останні 56 днів доступної історії. Модель вчиться прогнозувати середньоденні продажі за перші 11 днів історичних промо або за всю акцію, якщо вона коротша. Прогнозований темп множимо на тривалість контрольного промо (14 або 11 днів). Відстані для розрахунку ваг вимірюємо в координатах відповідного нормування.</p>
+<p>Проєктний метод обирає радіальний профіль за обмеженням на інтеграл спотворення оберненого відображення. Джерелом цієї умови є означення класу перед <a href="https://arxiv.org/html/2509.02008v3#S4">теоремою 4.3 у статті Sevost’yanov, Targonskii та Ilkevych</a>. Зміна MAPE є емпіричним результатом двох промо, використаних також під час розроблення методу.</p>
+<p><a href="../README.md">Опис і запуск</a> · <a href="../docs/THEORY.md">Математичне обґрунтування</a> · <a href="../results/product_error_distribution.html">Розподіл похибок за товарами</a> · <a href="mape.csv">MAPE</a> · <a href="mape_comparisons.csv">Інтервали різниці MAPE</a> · <a href="validation.json">Перевірки</a></p></html>

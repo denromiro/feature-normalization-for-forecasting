@@ -1,0 +1,139 @@
+{
+  "tables": [
+    {
+      "file": "data/evaluation.csv.gz",
+      "rows": 22089,
+      "privacy_passed": true
+    },
+    {
+      "file": "data/history.csv.gz",
+      "rows": 208429,
+      "privacy_passed": true
+    },
+    {
+      "file": "data/target.csv.gz",
+      "rows": 22089,
+      "privacy_passed": true
+    },
+    {
+      "file": "reference/mape.csv",
+      "rows": 12,
+      "privacy_passed": true
+    },
+    {
+      "file": "reference/predictions.csv.gz",
+      "rows": 88356,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/2026-05-28_candidates.csv",
+      "rows": 1001,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/2026-06-11_candidates.csv",
+      "rows": 1001,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/error_bins.csv",
+      "rows": 60,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/error_pairs.csv.gz",
+      "rows": 36606,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/error_pair_comparison.csv",
+      "rows": 6,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/error_zero_actual.csv",
+      "rows": 6,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/fit_audit.csv",
+      "rows": 8,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/mape.csv",
+      "rows": 12,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/mape_comparisons.csv",
+      "rows": 2,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_error_bins.csv",
+      "rows": 60,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_error_comparison.csv",
+      "rows": 6,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_error_details.csv",
+      "rows": 3022,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_error_summary.csv",
+      "rows": 12,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_error_zero_actual.csv",
+      "rows": 6,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/product_forecast_fact.csv",
+      "rows": 6044,
+      "privacy_passed": true
+    },
+    {
+      "file": "results/summary.csv",
+      "rows": 2,
+      "privacy_passed": true
+    }
+  ],
+  "no_original_names_or_ids": true,
+  "mapping_included": false,
+  "absolute_private_paths_absent": true,
+  "relative_links_passed": true,
+  "python_syntax_passed": true,
+  "code_hashes_match_verified_run": true,
+  "fresh_training_runs": 1,
+  "reproduction_max_difference": 0.0,
+  "runtime_models_included": false,
+  "note": "Real pseudonymized data; numerical values and dates retained.",
+  "verification_date": "2026-11-20",
+  "source_article": "https://arxiv.org/abs/2509.02008v3",
+  "profile_selection": [
+    {
+      "origin": "2026-05-28",
+      "candidates": 1001,
+      "accepted": 116,
+      "unrestricted_alpha": 1.0,
+      "selected_alpha": 0.115,
+      "budget_upper": 1.9203813714696383
+    },
+    {
+      "origin": "2026-06-11",
+      "candidates": 1001,
+      "accepted": 72,
+      "unrestricted_alpha": 1.0,
+      "selected_alpha": 0.07100000000000001,
+      "budget_upper": 1.9663810657308751
+    }
+  ]
+}

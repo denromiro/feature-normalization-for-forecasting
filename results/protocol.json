@@ -1,0 +1,193 @@
+{
+  "settings": {
+    "origins": [
+      "2026-05-28",
+      "2026-06-11"
+    ],
+    "windows": {
+      "112d": 112,
+      "all": null
+    },
+    "methods": [
+      "standard",
+      "project"
+    ],
+    "calibration_days": 56,
+    "neighbors": 10,
+    "weight_floor": 0.2,
+    "numeric_features": [
+      "regular_price",
+      "promo_price",
+      "promo_discount",
+      "horizon_days",
+      "concurrent_plans",
+      "month",
+      "weekday",
+      "calendar_index",
+      "pair_qty_7d",
+      "pair_qty_28d",
+      "pair_qty_56d",
+      "paid_price_28d",
+      "pair_trend_7v28",
+      "article_qty_28d",
+      "article_qty_56d",
+      "shop_qty_28d",
+      "shop_qty_56d",
+      "days_since_sale",
+      "last_stock",
+      "stock_age_days",
+      "stock_observed_days_28",
+      "stock_available_days_28",
+      "stock_mean_28",
+      "pair_promo_count",
+      "pair_promo_daily_mean",
+      "article_promo_count",
+      "article_promo_daily_mean",
+      "category_promo_count",
+      "category_promo_daily_mean",
+      "prior_pair_promos_all",
+      "prior_article_promos_all",
+      "first_pair_promo",
+      "first_article_promo",
+      "previous_pair_discount",
+      "days_since_previous_pair_promo",
+      "discount_change_pair_pp",
+      "price_change_pair_pct",
+      "previous_article_discount",
+      "discount_change_article_pp",
+      "mapped_substitutes",
+      "competitors_promo_unique",
+      "competitors_promo_per_day",
+      "competitors_promo_max",
+      "competitor_overlap_share",
+      "competitor_discount_mean",
+      "competitor_discount_max",
+      "competitor_price_mean",
+      "competitor_price_min",
+      "price_vs_competitor_mean",
+      "price_vs_competitor_min",
+      "discount_vs_competitor_mean_pp",
+      "discount_vs_competitor_max_pp"
+    ],
+    "category_features": [
+      "shop_id",
+      "l1",
+      "l2",
+      "l3",
+      "promo_type",
+      "weight"
+    ],
+    "feature_blocks": {
+      "price_discount": [
+        "regular_price",
+        "promo_price",
+        "promo_discount",
+        "paid_price_28d",
+        "previous_pair_discount",
+        "discount_change_pair_pp",
+        "price_change_pair_pct",
+        "previous_article_discount",
+        "discount_change_article_pp"
+      ],
+      "demand": [
+        "pair_qty_7d",
+        "pair_qty_28d",
+        "pair_qty_56d",
+        "pair_trend_7v28",
+        "article_qty_28d",
+        "article_qty_56d",
+        "shop_qty_28d",
+        "shop_qty_56d",
+        "pair_promo_daily_mean",
+        "article_promo_daily_mean",
+        "category_promo_daily_mean"
+      ],
+      "stock_recency": [
+        "last_stock",
+        "stock_age_days",
+        "stock_observed_days_28",
+        "stock_available_days_28",
+        "stock_mean_28",
+        "days_since_sale",
+        "days_since_previous_pair_promo"
+      ],
+      "competitor_promos": [
+        "mapped_substitutes",
+        "competitors_promo_unique",
+        "competitors_promo_per_day",
+        "competitors_promo_max",
+        "competitor_overlap_share",
+        "competitor_discount_mean",
+        "competitor_discount_max",
+        "competitor_price_mean",
+        "competitor_price_min",
+        "price_vs_competitor_mean",
+        "price_vs_competitor_min",
+        "discount_vs_competitor_mean_pp",
+        "discount_vs_competitor_max_pp"
+      ]
+    },
+    "model": {
+      "loss": "squared_error",
+      "learning_rate": 0.08,
+      "max_iter": 150,
+      "max_leaf_nodes": 31,
+      "max_depth": 8,
+      "min_samples_leaf": 30,
+      "l2_regularization": 1,
+      "max_bins": 255,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "threads": 4,
+    "radial": {
+      "fixed_inner_radius": 0.15,
+      "fixed_outer_radius": 0.9,
+      "phi_scale": 100.0,
+      "budget": 2.0,
+      "budget_margin": 0.0001,
+      "alpha_steps": 1000,
+      "integral_subdivisions": 32
+    },
+    "network_shops": 148
+  },
+  "data_manifest": {
+    "data/evaluation.csv.gz": {
+      "sha256": "97e6d72effd0ca3f1b6df050c524349e4b21551ae7adabc4e678494656f1d24f",
+      "bytes": 60443
+    },
+    "data/history.csv.gz": {
+      "sha256": "ea100166f0d546531114eed76e7fc1711b98f467bdcfc7d6f3225240cd7d9549",
+      "bytes": 8588165
+    },
+    "data/network.json": {
+      "sha256": "c50358a39a09583b0883ada1dd1a1f5642c69fc0da01ff957a4f543146af56fa",
+      "bytes": 2425
+    },
+    "data/scope.json": {
+      "sha256": "cfc7f22e31776b36787fd4176603945e280b7cb2c562e097a1350671cd7882df",
+      "bytes": 659
+    },
+    "data/target.csv.gz": {
+      "sha256": "048072d168e29fd884be747ff9f230e47e31e6256d8830e4e29dac6770ae1ea6",
+      "bytes": 1351444
+    }
+  },
+  "python": "3.10.13 | packaged by Anaconda, Inc. | (main, Sep 11 2023, 13:24:38) [MSC v.1916 64 bit (AMD64)]",
+  "packages": {
+    "numpy": "1.23.0",
+    "pandas": "1.5.0",
+    "scipy": "1.11.4",
+    "sklearn": "1.2.2",
+    "joblib": "1.2.0"
+  },
+  "code_sha256": {
+    "run_experiment.py": "a282ae5d8ac43a967ed226fba6980b25737567aceb2acf8c895a192677871a69",
+    "normalization.py": "7f31510de166317630e8049d1faf12d272908b720803b321b00454fccf72082b",
+    "radial_budget.py": "67318445eeafae7307d03be2179dd7ba52ee2ba0d499ce9f2fdc1fa392baefdb",
+    "weights.py": "9fd0faeffa3bc7c9e8467fcde852591bbe4ad81e911c76183ecebd436c1de993",
+    "check_math.py": "cf9d4c563aabacfc71f953276070b29edf64c661dc0a7a16a4c95b8e9664d7b9",
+    "evaluate.py": "7f0f08c3599697c76802884e96381a1210e85e412e25600f1725492aaad97efa"
+  },
+  "prediction_sha256": "43da9688682437e5fe678082b65d2f46208fa97c9f6b47b88ddac0ff2d3b023f"
+}

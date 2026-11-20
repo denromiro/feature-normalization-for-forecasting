@@ -1,0 +1,16 @@
+{
+  "product_totals_match_main_report": true,
+  "max_total_or_ape_difference": 0.0,
+  "all_12_mape_values_match": true,
+  "bin_counts_sum_to_positive_n": true,
+  "positive_per_window": {
+    "112d": 797,
+    "all": 797
+  },
+  "zero_per_window": {
+    "112d": 714,
+    "all": 714
+  },
+  "source_manifests_verified": true,
+  "equality_tolerance": 1e-08
+}
