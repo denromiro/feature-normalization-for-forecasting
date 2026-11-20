@@ -24,8 +24,8 @@
     "bytes": 5238
   },
   "CITATION.cff": {
-    "sha256": "efe3c6ba7cd39a4fed6fb9e79a30832b47241dc2226d162dabfe76cb1f0b6ca8",
-    "bytes": 688
+    "sha256": "8efbe856f5806d093e36fb6d043405be87dfbebece9bc406e4ce91ffc8f25bdf",
+    "bytes": 590
   },
   "data/evaluation.csv.gz": {
     "sha256": "97e6d72effd0ca3f1b6df050c524349e4b21551ae7adabc4e678494656f1d24f",
@@ -60,8 +60,8 @@
     "bytes": 5476
   },
   "docs/PORTAL.md": {
-    "sha256": "cfee936828405921e942d19a885f23e5d4a15b726df8bf6460fdb9b09f574e95",
-    "bytes": 4607
+    "sha256": "4d30bf6c61cd82ea057c606174423af8756c283b9a086ccc09ba180f54e521fd",
+    "bytes": 4589
   },
   "docs/PRODUCT_ERROR_DISTRIBUTION.md": {
     "sha256": "f1eceb95b750153bd2cd47eb80afe89a5e26ef8155e793faa1caa95aa53ec3dc",
@@ -104,8 +104,8 @@
     "bytes": 5318
   },
   "README.md": {
-    "sha256": "efd8ce9647d115def1e8ae238661f51924c05a3f7c522e142adecf86f5108a5a",
-    "bytes": 8806
+    "sha256": "fcefd9e4a779ddcaa84f72c13bc121b96329b220e9d4e27f77c96880868320ab",
+    "bytes": 8788
   },
   "reference/mape.csv": {
     "sha256": "1dd33c4d86c33ccff0214c242c91f9f3abb43d9f5ce33884b24bd8cb54835c40",

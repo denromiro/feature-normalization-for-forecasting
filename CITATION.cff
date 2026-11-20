@@ -5,11 +5,9 @@ type: software
 authors:
 - family-names: Sevost'yanov
   given-names: Evgeny
-  affiliation: Department of Mathematical Analysis, Business Analysis and Statistics,
-    Zhytomyr Ivan Franko State University
+  affiliation: Department of Mathematics, Zhytomyr Ivan Franko State University
 - family-names: Romash
   given-names: Denys
-  affiliation: Department of Mathematical Analysis, Business Analysis and Statistics,
-    Zhytomyr Ivan Franko State University
+  affiliation: Department of Mathematics, Zhytomyr Ivan Franko State University
 abstract: Software demonstrating the use of a mathematical result from NRFU project
   2025.02/0010 to normalize features for promotional sales forecasting.
