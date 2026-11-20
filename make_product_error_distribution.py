@@ -72,7 +72,7 @@ def save_png(products, scores, comparisons, output):
         for method, label in [('standard', 'Стандартне масштабування'), ('project', 'Проєктне нормування')]:
             score = both_scores.loc[(window, method)]
             mape = format(score.mape, '.2f').replace('.', ',')
-            titles[method] = f'{label}\nMAPE {mape}% · кількість похибок понад 100% — {int(score.over_100)}'
+            titles[method] = f'{label}\nMAPE {mape}% · кількість похибок понад 100% - {int(score.over_100)}'
         draw_forecasts(axes, current, titles, x_ticks, y_ticks, np.log1p(x_max)*1.035,
                        np.log1p(y_max)*1.05, positive['actual_qty'].max())
         fig.suptitle(f'Сумарні продажі товару за акцію · {title}', fontsize=19, x=.07, ha='left', y=.97)

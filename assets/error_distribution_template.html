@@ -20,10 +20,10 @@ select{min-width:210px;padding:10px 32px 10px 12px;font:inherit;background:white
 <body><main>
 
 <h1>Похибка прогнозу продажів в окремих магазинах</h1>
-<p class="muted">Кожна бульбашка відповідає одному прогнозу продажів товару в одному магазині за акцію. По горизонталі відкладено абсолютну відносну похибку (APE), по вертикалі — прогноз у штуках. Більша бульбашка означає більші фактичні продажі.</p>
+<p class="muted">Кожна бульбашка відповідає одному прогнозу продажів товару в одному магазині за акцію. По горизонталі відкладено абсолютну відносну похибку (APE), по вертикалі - прогноз у штуках. Більша бульбашка означає більші фактичні продажі.</p>
 <div class="controls">
 <label>Історія навчання<select id="history"><option value="all">Повна доступна</option><option value="112d">Останні 112 днів</option></select></label>
-<label>Контрольне промо<select id="period"><option value="both">Обидва промо разом</option><option value="2026-05-28">28.05–10.06 · 14 днів</option><option value="2026-06-11">11–21.06 · 11 днів</option></select></label>
+<label>Контрольне промо<select id="period"><option value="both">Обидва промо разом</option><option value="2026-05-28">28.05-10.06 · 14 днів</option><option value="2026-06-11">11-21.06 · 11 днів</option></select></label>
 <label>Шкали обох осей<select id="scale"><option value="compressed">Логарифмічні, log(1+x)</option><option value="linear">Лінійні</option></select></label>
 </div>
 <p id="scope" class="status"></p>
@@ -54,7 +54,7 @@ const rows = data.rows.map(row => Object.fromEntries(data.columns.map((key,i) =>
 const fmt = new Intl.NumberFormat('uk-UA', {maximumFractionDigits:0});
 const decimal = new Intl.NumberFormat('uk-UA', {maximumFractionDigits:2});
 const percent = value => decimal.format(value)+'%';
-const labels = ['0–15%', '>15–25%', '>25–50%', '>50–100%', '>100%'];
+const labels = ['0-15%', '>15-25%', '>25-50%', '>50-100%', '>100%'];
 const colors = {standard:'#2876bb', project:'#db7527'};
 const ticksX = [0,15,25,50,100,300,1000,3000,15000];
 const ticksY = [0,1,5,10,25,50,100,200,500];
@@ -70,7 +70,7 @@ async function render() {
   const selected = rows.filter(row => row.window === windowName && (period==='both' || row.origin===period));
   const summary = data.comparisons.find(match);
   const zero = data.zeros.find(match);
-  document.getElementById('scope').textContent = 'Прогнозів із продажами — '+fmt.format(selected.length)+'. Прогнозів за нульових продажів — '+fmt.format(zero.zero_n)+'.';
+  document.getElementById('scope').textContent = 'Прогнозів із продажами - '+fmt.format(selected.length)+'. Прогнозів за нульових продажів - '+fmt.format(zero.zero_n)+'.';
   for (const key of ['better','worse','equal']) {
     document.getElementById(key).textContent = fmt.format(summary[key]);
     document.getElementById(key+'_pct').textContent = percent(summary[key]/summary.positive_n*100)+' прогнозів із продажами';

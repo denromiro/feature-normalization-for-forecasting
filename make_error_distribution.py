@@ -47,7 +47,7 @@ def count_changes(difference):
 def summarize(forecasts):
     # %% Інтервали APE й порівняння прогнозів для тих самих спостережень
     bins = [0, 15, 25, 50, 100, np.inf]
-    labels = ['0–15%', '>15–25%', '>25–50%', '>50–100%', '>100%']
+    labels = ['0-15%', '>15-25%', '>25-50%', '>50-100%', '>100%']
     groups, comparisons, zeros = [], [], []
     for window in ['all', '112d']:
         history = forecasts[forecasts['window'] == window]
@@ -110,7 +110,7 @@ def save_png(pairs, output):
     fig.patch.set_facecolor('#f6f8fb')
     draw_forecasts(axes, positive, titles, x_ticks, y_ticks, x_limit, y_limit, pairs['actual_qty'].max())
     fig.suptitle('Похибка прогнозу в окремих магазинах', fontsize=19, x=.07, ha='left', y=.97)
-    fig.text(.07, .895, f'Повна історія, дві акції. Кількість прогнозів із продажами — {len(positive)}.'
+    fig.text(.07, .895, f'Повна історія, дві акції. Кількість прогнозів із продажами - {len(positive)}.'
              + ' Більша бульбашка означає більші фактичні продажі.', fontsize=11)
     fig.text(.07, .08, 'Обидві осі мають шкалу log(1+x). Позначки показують похибку у відсотках і прогноз у штуках.', fontsize=10, color='#465268')
     fig.text(.07, .035, f"З проєктним нормуванням похибка менша у {changes['better']} випадках, більша у {changes['worse']}, однакова у {changes['equal']}.", fontsize=11)
